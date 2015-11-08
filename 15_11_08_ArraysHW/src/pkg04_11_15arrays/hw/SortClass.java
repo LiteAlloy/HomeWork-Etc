@@ -6,9 +6,11 @@ public class SortClass {
 
         int[] firstArray = {4, 8, 29, 5, 23, 12};
         System.out.println("Первый массив:");
+        
         for (int index : firstArray) {
-            System.out.println(index);
+            System.out.print(String.format("%3d",index));
         }
+        
         for (int i = firstArray.length - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
                 if (firstArray[j] > firstArray[j + 1]) {
@@ -21,19 +23,18 @@ public class SortClass {
 
         System.out.println("\nОтсортированный первый массив:");
         for (int al : firstArray) {
-            System.out.println(al);
+            System.out.print(String.format("%3d",al));
         }
         System.out.println();
-
     }
 
     public void secondSort() {
         int[] secondArray = new int[6];
-
-        System.out.println("Второй массив:");
+        System.out.println("\nВторой массив:");
+        
         for (int i = 0; i < secondArray.length; i++) {
             secondArray[i] = (int) (Math.random() * 100);
-            System.out.println(secondArray[i]);
+            System.out.print(String.format("%3d",secondArray[i]));
         }
         
         for (int i = 0; i < secondArray.length; i++) {
@@ -46,17 +47,18 @@ public class SortClass {
                     lowest_index = j;
                 }
             }
+            
             if(i!= lowest_index){
                 int change = secondArray[i];
                 secondArray[i] = secondArray[lowest_index];
                 secondArray[lowest_index] = change;
             }
             
-            }
-        System.out.println("\nОтсортированный второй массив:");
-            for(int i = 0; i < secondArray.length; i++){
-                System.out.println(secondArray[i]);
         }
         
+        System.out.println("\nОтсортированный второй массив:");
+            for(int i = 0; i < secondArray.length; i++){
+                System.out.print(String.format("%3d", secondArray[i]));
+        }
     }
 }

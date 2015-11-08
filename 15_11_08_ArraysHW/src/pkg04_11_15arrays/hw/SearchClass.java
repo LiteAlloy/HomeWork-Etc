@@ -8,10 +8,12 @@ public class SearchClass {
         int toFind = (int) (Math.random() * 10);
         System.out.println("\nЧисло для первого поиска: " + toFind);
 
+        System.out.println("\nПервый массив для поиска:");
         for (int i = 0; i < firstSearchArray.length; i++) {
             firstSearchArray[i] = (int) (Math.random() * 10);
-            System.out.println(firstSearchArray[i]);
+            System.out.print(String.format("%3d", firstSearchArray[i]));
         }
+        System.out.println();
 
         for (int i = 0; i < firstSearchArray.length; i++) {
             if (firstSearchArray[i] == toFind) {
@@ -26,16 +28,17 @@ public class SearchClass {
 
         int[] secondSearchArray = new int[10];
 
-        System.out.println("\nВторой массив, неотсортированный: ");
+        System.out.println("\nВторой массив для поиска, неотсортированный: ");
         for (int i = 0; i < secondSearchArray.length; i++) {
             secondSearchArray[i] = (int) (Math.random() * 10);
-            System.out.println(secondSearchArray[i]);
+            System.out.print(String.format("%3d", secondSearchArray[i]));
         }
+        System.out.println();
 
         int toFind = (int) (Math.random() * 10);
         System.out.println("\nЧисло для второго поиска: " + toFind);
 
-        System.out.println("\nВторой массив, отсортированный: ");
+        System.out.println("\nВторой массив для поиска, отсортированный: ");
         for (int i = secondSearchArray.length - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
                 if (secondSearchArray[j] > secondSearchArray[j + 1]) {
@@ -45,9 +48,11 @@ public class SearchClass {
                 }
             }
         }
+
         for (int i = 0; i < secondSearchArray.length; i++) {
-            System.out.println(secondSearchArray[i]);
+            System.out.print(String.format("%3d", secondSearchArray[i]));
         }
+        System.out.println();
 
         for (int i = 0; i < secondSearchArray.length / 2; i++) {
             if (toFind <= secondSearchArray[secondSearchArray.length / 2]) {
@@ -58,6 +63,7 @@ public class SearchClass {
                 }
             }
         }
+
         for (int j = secondSearchArray.length / 2; j < secondSearchArray.length; j++) {
             if (toFind >= secondSearchArray[secondSearchArray.length / 2]) {
                 if (secondSearchArray[j] == toFind) {
