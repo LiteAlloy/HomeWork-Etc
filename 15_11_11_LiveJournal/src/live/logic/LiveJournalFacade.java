@@ -55,7 +55,7 @@ public class LiveJournalFacade {
     }
     
     public LiveUser getLiveUserOfPost(long postId) {
-        return postManager.getLiveUserOfPost(postId);
+        return postManager.getLiveUser(postId);
     }
     //комментарий
     

@@ -25,7 +25,7 @@ public class LivePostManager {
         return dao.getLivePost(postId);
     }
     
-    public LiveUser getLiveUserOfPost(long postId) {
+    public LiveUser getLiveUser(long postId) {
         return dao.getLiveUser(postId);
     }
     
