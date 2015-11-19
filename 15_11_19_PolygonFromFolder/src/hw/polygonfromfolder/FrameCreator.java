@@ -8,7 +8,7 @@ public class FrameCreator extends JFrame{
         DrawPolygon dp = new DrawPolygon();
         add(dp);
         setBounds(200, 200, 300, 300);
-        
+        dp.setCoordinates();
     }
     
 }
