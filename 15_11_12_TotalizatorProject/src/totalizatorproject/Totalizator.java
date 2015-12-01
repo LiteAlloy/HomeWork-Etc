@@ -1,5 +1,6 @@
 package totalizatorproject;
 
+import java.util.List;
 import totalizatorproject.entity.Bet;
 import totalizatorproject.entity.Horserace;
 import totalizatorproject.entity.User;
@@ -11,27 +12,32 @@ public class Totalizator {
         TotalizatorFacade facade = new TotalizatorFacade();
         
         User user = new User();
+        user.setMail("user1@send.to");
+        user.setBalance(100);
         
         String mail = facade.addUser(user);
+        List<User> users = facade.getUsersList();
         facade.getUser(mail);
-        facade.uppdateUser(mail);
+        facade.uppdateUser(user);
         facade.deleteUser(mail);
         
         System.out.println("---");
         Horserace race = new Horserace();
         
-        facade.addHorserace();
-        facade.uppdateHorserace();
-        facade.deleteHorserace();
+        facade.addHorserace(race);
+        facade.uppdateHorserace(race);
+        facade.deleteHorserace(race.getRaceId());
         
         System.out.println("---");
         Bet bet = new Bet();
+        bet.setUser(user);
+        bet.setRace(race);
+        bet.setHorse("1");
+        bet.setSumm(50);
         
-        int summ = facade.addBet(bet);
-        facade.checkBet(summ);
-        facade.sendBetResult(mail);
-        facade.getBetUser();
-        
+        facade.addBet(bet);
+        facade.checkBet(bet);
+        facade.sendBetResult(bet);
+        facade.deleteBet(bet);
     }
-    
 }

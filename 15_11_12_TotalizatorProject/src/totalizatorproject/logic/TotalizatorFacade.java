@@ -1,7 +1,10 @@
 package totalizatorproject.logic;
 
+import java.util.List;
 import totalizatorproject.entity.Bet;
+import totalizatorproject.entity.Horserace;
 import totalizatorproject.entity.User;
+import totalizatorproject.exceptions.TotalizatorBusinessException;
 
 public class TotalizatorFacade {
     private UserManager userManager;
@@ -15,38 +18,51 @@ public class TotalizatorFacade {
     }
     
     public String addUser(User user){
-        return userManager.addUser(user);
+        try {
+            return userManager.addUser(user);
+        } catch (TotalizatorBusinessException ex) {
+        }
+        return "mail";
     }
     public User getUser(String mail){
         return userManager.getUser(mail);
     }
-    public void uppdateUser(String mail){
-        userManager.uppdateUser(mail);
+    public void uppdateUser(User user){
+        userManager.uppdateUser(user);
     }
     public void deleteUser(String mail){
         userManager.deleteUser(mail);
     }
-    
-    public void addHorserace(){
-        horseraceManager.addHorserace();
-    }
-    public void uppdateHorserace(){
-        horseraceManager.uppdateHorserace();
-    }
-    public void deleteHorserace(){
-        horseraceManager.deleteHorserace();
+    public List<User> getUsersList(){
+        return userManager.getUsersList();
     }
     
-    public int addBet(Bet bet){
-        return betManager.addBet(bet);
+    public void addHorserace(Horserace race){
+        try {
+            horseraceManager.addHorserace(race);
+        } catch (TotalizatorBusinessException ex) {
+        }
     }
-    public void checkBet(int summ){
-        betManager.checkBet(summ);
+    public void uppdateHorserace(Horserace race){
+        horseraceManager.uppdateHorserace(race);
     }
-    public void sendBetResult(String mail){
-        betManager.sendBetResult(mail);
+    public void deleteHorserace(long raceId){
+        horseraceManager.deleteHorserace(raceId);
     }
-    public User getBetUser(){
-        return betManager.getBetUser();
+    
+    public void addBet(Bet bet){
+        try {
+            betManager.addBet(bet);
+        } catch (TotalizatorBusinessException ex) {
+        }
+    }
+    public void checkBet(Bet bet){
+        betManager.checkBet(bet);
+    }
+    public void sendBetResult(Bet bet){
+        betManager.sendBetResult(bet);
+    }
+    public void deleteBet(Bet bet){
+        betManager.deleteBet(bet);
     }
 }

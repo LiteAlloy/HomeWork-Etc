@@ -1,24 +1,23 @@
-package totalizatorproject.dao.fotest;
+package totalizatorproject.dao;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import totalizatorproject.dao.UserDAO;
-import totalizatorproject.entity.Bet;
 import totalizatorproject.entity.User;
 import totalizatorproject.exceptions.TotalizatorDAOException;
 
-public class UserDAOTest implements UserDAO{
-    
-    private List<User> users = new ArrayList<User>();
-    private List<Bet> bets = new ArrayList<Bet>();
+public abstract class UserFileDAO implements UserDAO{
+    protected List<User> users;
 
     @Override
     public String addUser(User user)  throws TotalizatorDAOException{
+        if(users == null) {
+            loadCollection();
+        }
         try {
             User us = (User)user.clone();
             users.add(us);
-            System.out.println("add User;");
+            saveCollection();
         } catch (Exception ex) {
             throw new TotalizatorDAOException(ex);
         }    
@@ -27,6 +26,9 @@ public class UserDAOTest implements UserDAO{
 
     @Override
     public User getUser(String mail)  throws TotalizatorDAOException{
+        if(users == null) {
+            loadCollection();
+        }
         User found = null;
         User tmp = getTrueUser(mail);
         if(tmp != null){
@@ -53,11 +55,14 @@ public class UserDAOTest implements UserDAO{
         found.setMail(user.getMail());
         found.setBalance(user.getBalance());
         found.setBets(user.getBets());
-        System.out.println("uppdate User");
+        saveCollection();
     }
 
     @Override
     public void deleteUser(String mail)  throws TotalizatorDAOException{
+        if(users == null) {
+            loadCollection();
+        }
         for(Iterator<User> it = users.iterator(); it.hasNext(); ){
             User user = it.next();
             if(user.getMail().equals(mail)){
@@ -65,15 +70,21 @@ public class UserDAOTest implements UserDAO{
                 break;
             }
         }
-        System.out.println("delete User " + mail);
+        saveCollection();
     }    
 
     @Override
     public List<User> getUsersList() throws TotalizatorDAOException {
+        if(users == null) {
+            loadCollection();
+        }
         List<User> result = new ArrayList<User>();
         for(User us : users) {
             result.add((User)us.clone());
         }
         return result;
     }
-} 
+    
+    abstract protected void saveCollection() throws TotalizatorDAOException;
+    abstract protected void loadCollection() throws TotalizatorDAOException;
+}

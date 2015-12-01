@@ -1,18 +1,12 @@
 package totalizatorproject.entity;
 
-public class User {
-    private String name;
+import java.io.Serializable;
+import java.util.List;
+
+public class User implements Serializable{
     private String mail;
     private int balance;
-    private Bet bet;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private List<Bet> bets;
 
     public String getMail() {
         return mail;
@@ -30,12 +24,21 @@ public class User {
         this.balance = balance;
     }
 
-    public Bet getBet() {
-        return bet;
+    public List<Bet> getBets() {
+        return bets;
     }
 
-    public void setBet(Bet bet) {
-        this.bet = bet;
+    public void setBets(List<Bet> bets) {
+        this.bets = bets;
+    }
+
+    @Override
+    public Object clone(){
+        User us = new User();
+        us.setMail(mail);
+        us.setBalance(balance);
+        us.setBets(bets);
+        return us;
     }
     
     

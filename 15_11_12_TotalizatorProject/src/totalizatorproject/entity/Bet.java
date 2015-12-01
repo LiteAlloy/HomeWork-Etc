@@ -1,6 +1,8 @@
 package totalizatorproject.entity;
 
-public class Bet {
+import java.io.Serializable;
+
+public class Bet implements Serializable{
     private User user;
     private Horserace race;
     private String horse;
@@ -36,6 +38,16 @@ public class Bet {
 
     public void setSumm(int summ) {
         this.summ = summ;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Bet be = new Bet();
+        be.setUser(user);
+        be.setRace(race);
+        be.setHorse(horse);
+        be.setSumm(summ);
+        return be;
     }
     
     

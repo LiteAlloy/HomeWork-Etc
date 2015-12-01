@@ -1,10 +1,13 @@
 package totalizatorproject.dao;
 
+import java.util.List;
 import totalizatorproject.entity.User;
+import totalizatorproject.exceptions.TotalizatorDAOException;
 
 public interface UserDAO {
-    public String addUser(User user);
-    public User getUser(String mail);
-    public void uppdateUser(String mail);
-    public void deleteUser(String mail);
+    public String addUser(User user) throws TotalizatorDAOException;
+    public User getUser(String mail) throws TotalizatorDAOException;
+    public void uppdateUser(User user) throws TotalizatorDAOException;
+    public void deleteUser(String mail) throws TotalizatorDAOException;
+    public List<User> getUsersList() throws TotalizatorDAOException;
 }

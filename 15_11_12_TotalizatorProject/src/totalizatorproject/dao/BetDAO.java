@@ -2,11 +2,12 @@
 package totalizatorproject.dao;
 
 import totalizatorproject.entity.Bet;
-import totalizatorproject.entity.User;
+import totalizatorproject.exceptions.TotalizatorDAOException;
 
 public interface BetDAO {
-   public int addBet(Bet bet);
-   public void checkBet(int summ);
-   public void sendBetResult(String mail);
-   public User getBetUser();
+   public void addBet(Bet bet) throws TotalizatorDAOException;
+   public void uppdateBet(Bet bet) throws TotalizatorDAOException;
+   public void sendBetResult(Bet bet) throws TotalizatorDAOException;
+   public void deleteBet(Bet bet) throws TotalizatorDAOException;
+   public Bet getBet(Bet bet) throws TotalizatorDAOException;
 }
