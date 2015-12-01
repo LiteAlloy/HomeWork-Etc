@@ -15,11 +15,11 @@ import javax.swing.JFrame;
 public class MovingFrame extends JFrame implements ActionListener {
 
     private final FrameForMovement ffm;
-    private JButton LEFT = new JButton();
-    private JButton RIGHT = new JButton();
-    private JButton UP = new JButton();
-    private JButton DOWN = new JButton();
-    private JButton lang = new JButton();
+    private final JButton LEFT = new JButton();
+    private final JButton RIGHT = new JButton();
+    private final JButton UP = new JButton();
+    private final JButton DOWN = new JButton();
+    private final JButton lang = new JButton();
 
     Properties pro = new Properties();
 
@@ -30,22 +30,18 @@ public class MovingFrame extends JFrame implements ActionListener {
         setLangText();
         this.ffm = ffm;
 
-        
         LEFT.setActionCommand("left");
         LEFT.addActionListener(this);
         add(LEFT, BorderLayout.WEST);
 
-        
         RIGHT.setActionCommand("right");
         RIGHT.addActionListener(this);
         add(RIGHT, BorderLayout.EAST);
 
-        
         UP.setActionCommand("up");
         UP.addActionListener(this);
         add(UP, BorderLayout.NORTH);
 
-        
         DOWN.setActionCommand("down");
         DOWN.addActionListener(this);
         add(DOWN, BorderLayout.SOUTH);
@@ -56,7 +52,7 @@ public class MovingFrame extends JFrame implements ActionListener {
         add(lang, BorderLayout.CENTER);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setBounds(300, 300, 200, 200);
+        setBounds(300, 300, 220, 220);
         setVisible(true);
     }
 
@@ -66,25 +62,20 @@ public class MovingFrame extends JFrame implements ActionListener {
             if (lang.getText().equals("RU")) {
                 try {
                     setLangRU();
-                    lang.setText("EN");
-                } catch (IOException ex) {
+                } catch (Exception ex) {
                     System.out.println("Russian error!");
                 }
-            } else if(lang.getText().equals("EN")){
-                try{
+            } else if (lang.getText().equals("EN")) {
+                try {
                     setLangEN();
-                    lang.setText("EN");
                 } catch (IOException ex) {
                     System.out.println("English error");
+                }
             }
-            }
-        
-
         } else {
             moveTo = e.getActionCommand();
             moveFrame();
         }
-
     }
 
     public void moveFrame() {
@@ -105,20 +96,22 @@ public class MovingFrame extends JFrame implements ActionListener {
         }
         ffm.setBounds(r);
     }
-    
+
     private void setLangText() throws IOException {
         pro.load(new FileReader(proFile));
         LEFT.setText(pro.getProperty("left.button.text"));
         RIGHT.setText(pro.getProperty("right.button.text"));
         UP.setText(pro.getProperty("up.button.text"));
         DOWN.setText(pro.getProperty("down.button.text"));
-        
+
     }
 
     private void setLangRU() throws IOException {
-        PropertyResourceBundle prb = (PropertyResourceBundle) 
-                PropertyResourceBundle.getBundle("src/langgg/langproperty", new Locale("RU"));
+        lang.setText("EN");
         
+        PropertyResourceBundle prb = (PropertyResourceBundle) PropertyResourceBundle
+                    .getBundle("langgg/langproperty", new Locale("RU"));
+
         LEFT.setText(prb.getString("left.button.text"));
         RIGHT.setText(prb.getString("right.button.text"));
         UP.setText(prb.getString("up.button.text"));
@@ -126,8 +119,10 @@ public class MovingFrame extends JFrame implements ActionListener {
     }
 
     private void setLangEN() throws IOException {
-        PropertyResourceBundle prb = (PropertyResourceBundle) 
-                PropertyResourceBundle.getBundle("langproperty", new Locale("EN"));
+        lang.setText("RU");
+        
+        PropertyResourceBundle prb = (PropertyResourceBundle) PropertyResourceBundle
+                    .getBundle("langgg/langproperty", new Locale("EN"));
         LEFT.setText(prb.getString("left.button.text"));
         RIGHT.setText(prb.getString("right.button.text"));
         UP.setText(prb.getString("up.button.text"));
