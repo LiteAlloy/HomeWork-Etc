@@ -1,5 +1,7 @@
 package totalizatorproject;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import totalizatorproject.entity.Bet;
 import totalizatorproject.entity.Horserace;
@@ -17,16 +19,22 @@ public class Totalizator {
         
         String mail = facade.addUser(user);
         List<User> users = facade.getUsersList();
-        facade.getUser(mail);
-        facade.uppdateUser(user);
-        facade.deleteUser(mail);
+        facade.getUser(user.getMail());
+        facade.uppdateUser(user.getMail());
+        facade.deleteUser(user.getMail());
         
         System.out.println("---");
         Horserace race = new Horserace();
+        race.setDate(new Date());
+        ArrayList<String> horses = new ArrayList<>();
+        race.setHorses(horses);
+        race.getHorses().add("1");
+        race.getHorses().add("2");
+        race.getHorses().add("3");
         
         facade.addHorserace(race);
         facade.uppdateHorserace(race);
-        facade.deleteHorserace(race.getRaceId());
+        //facade.deleteHorserace(race.getRaceId());
         
         System.out.println("---");
         Bet bet = new Bet();
@@ -37,7 +45,7 @@ public class Totalizator {
         
         facade.addBet(bet);
         facade.checkBet(bet);
-        facade.sendBetResult(bet);
-        facade.deleteBet(bet);
+        //facade.sendBetResult(bet.getBetId());
+        //facade.deleteBet(bet);
     }
 }

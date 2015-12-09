@@ -1,4 +1,4 @@
-package totalizatorproject.dao;
+package totalizatorproject.dao.user;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,6 +21,7 @@ public abstract class UserFileDAO implements UserDAO{
         } catch (Exception ex) {
             throw new TotalizatorDAOException(ex);
         }    
+        System.out.println("add User");
         return user.getMail();
     }
 
@@ -28,13 +29,12 @@ public abstract class UserFileDAO implements UserDAO{
     public User getUser(String mail)  throws TotalizatorDAOException{
         if(users == null) {
             loadCollection();
-        }
+        }        
         User found = null;
         User tmp = getTrueUser(mail);
         if(tmp != null){
             found = (User)tmp.clone();
         }
-        System.out.println("get User;");
         return found;
     }
     
@@ -50,12 +50,13 @@ public abstract class UserFileDAO implements UserDAO{
     }
 
     @Override
-    public void uppdateUser(User user)  throws TotalizatorDAOException{
-        User found = getUser(user.getMail());
-        found.setMail(user.getMail());
-        found.setBalance(user.getBalance());
-        found.setBets(user.getBets());
+    public void uppdateUser(String mail)  throws TotalizatorDAOException{
+        User found = getUser(mail);
+        found.setMail(mail);
+        found.setBalance(getUser(mail).getBalance());
+        found.setBets(getUser(mail).getBets());
         saveCollection();
+        System.out.println("uppdate User");
     }
 
     @Override
@@ -71,6 +72,7 @@ public abstract class UserFileDAO implements UserDAO{
             }
         }
         saveCollection();
+        System.out.println("delete User");
     }    
 
     @Override

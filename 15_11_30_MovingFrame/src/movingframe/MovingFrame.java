@@ -12,9 +12,9 @@ import java.util.PropertyResourceBundle;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class MovingFrame extends JFrame implements ActionListener {
+public class MovingFrame extends JFrame implements ActionListener, Runnable {
 
-    private final FrameForMovement ffm;
+    private FrameForMovement ffm;
     private final JButton LEFT = new JButton();
     private final JButton RIGHT = new JButton();
     private final JButton UP = new JButton();
@@ -56,21 +56,26 @@ public class MovingFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    @Override
+    MovingFrame() {
+        }
+
+       @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("langPro")) {
             if (lang.getText().equals("RU")) {
                 try {
                     setLangRU();
-                } catch (Exception ex) {
+                    lang.setText("EN");
+                } catch (IOException ex) {
                     System.out.println("Russian error!");
                 }
-            } else if (lang.getText().equals("EN")) {
-                try {
+            } else if(lang.getText().equals("EN")){
+                try{
                     setLangEN();
+                    lang.setText("RU");
                 } catch (IOException ex) {
                     System.out.println("English error");
-                }
+            }
             }
         } else {
             moveTo = e.getActionCommand();
@@ -80,6 +85,17 @@ public class MovingFrame extends JFrame implements ActionListener {
 
     public void moveFrame() {
         Rectangle r = ffm.getBounds();
+        int windowHeight = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height;
+        int windowWidth = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width;
+        if(r.x <= 0) {
+            moveTo = "right";
+        } else if (r.x >= windowWidth - r.width) {
+            moveTo = "left";
+        } else if (r.y <= 0) {
+            moveTo = "down";
+        } else if (r.y >= windowHeight - r.height) {
+            moveTo = "up";
+        }
         switch (moveTo) {
             case "up":
                 r.y -= 10;
@@ -107,8 +123,6 @@ public class MovingFrame extends JFrame implements ActionListener {
     }
 
     private void setLangRU() throws IOException {
-        lang.setText("EN");
-        
         PropertyResourceBundle prb = (PropertyResourceBundle) PropertyResourceBundle
                     .getBundle("langgg/langproperty", new Locale("RU"));
 
@@ -118,14 +132,29 @@ public class MovingFrame extends JFrame implements ActionListener {
         DOWN.setText(prb.getString("down.button.text"));
     }
 
-    private void setLangEN() throws IOException {
-        lang.setText("RU");
-        
+    private void setLangEN() throws IOException {        
         PropertyResourceBundle prb = (PropertyResourceBundle) PropertyResourceBundle
                     .getBundle("langgg/langproperty", new Locale("EN"));
         LEFT.setText(prb.getString("left.button.text"));
         RIGHT.setText(prb.getString("right.button.text"));
         UP.setText(prb.getString("up.button.text"));
         DOWN.setText(prb.getString("down.button.text"));
+    }
+
+    @Override
+    public void run() {
+        try {
+            ffm = new FrameForMovement();
+            MovingFrame mf = new MovingFrame(ffm);
+            while(ffm != null){
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ex) {
+                }
+                mf.moveFrame();
+            }
+        } catch (IOException ex) {
+        }
+        
     }
 }

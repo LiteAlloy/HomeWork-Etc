@@ -1,9 +1,9 @@
-package totalizatorproject.dao.fotest;
+package totalizatorproject.dao.a_test;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import totalizatorproject.dao.UserDAO;
+import totalizatorproject.dao.user.UserDAO;
 import totalizatorproject.entity.Bet;
 import totalizatorproject.entity.User;
 import totalizatorproject.exceptions.TotalizatorDAOException;
@@ -48,11 +48,11 @@ public class UserDAOTest implements UserDAO{
     }
 
     @Override
-    public void uppdateUser(User user)  throws TotalizatorDAOException{
-        User found = getUser(user.getMail());
-        found.setMail(user.getMail());
-        found.setBalance(user.getBalance());
-        found.setBets(user.getBets());
+    public void uppdateUser(String mail)  throws TotalizatorDAOException{
+        User found = getUser(mail);
+        found.setMail(mail);
+        found.setBalance(getUser(mail).getBalance());
+        found.setBets(getUser(mail).getBets());
         System.out.println("uppdate User");
     }
 

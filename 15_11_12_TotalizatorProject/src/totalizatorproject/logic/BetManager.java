@@ -1,10 +1,8 @@
 package totalizatorproject.logic;
 
-import totalizatorproject.dao.BetDAO;
-import totalizatorproject.dao.BetDAOFactory;
+import totalizatorproject.dao.bet.BetDAO;
+import totalizatorproject.dao.bet.BetDAOFactory;
 import totalizatorproject.entity.Bet;
-import totalizatorproject.entity.Horserace;
-import totalizatorproject.entity.User;
 import totalizatorproject.exceptions.TotalizatorBusinessException;
 import totalizatorproject.exceptions.TotalizatorDAOException;
 
@@ -16,6 +14,7 @@ public class BetManager {
         try {
             dao.addBet(bet);
         } catch (TotalizatorDAOException ex) {
+            System.out.println("Error! BetManager addBet not working!");
            throw new TotalizatorBusinessException (ex); 
         }
     }
@@ -24,20 +23,23 @@ public class BetManager {
         try {
             dao.uppdateBet(bet);
         } catch (TotalizatorDAOException ex) {
+            System.out.println("Error! BetManager checkBet not working!");
         }
     }
 
-    public void sendBetResult(Bet bet){
+    public void sendBetResult(long betId){
         try {
-            dao.sendBetResult(bet);
+            dao.sendBetResult(betId);
         } catch (TotalizatorDAOException ex) {
+            System.out.println("Error! BetManager sendBetResult not working!");
         }
     }
 
-    public void deleteBet(Bet bet){
+    public void deleteBet(long betId){
         try {
-            dao.deleteBet(bet);
+            dao.deleteBet(betId);
         } catch (TotalizatorDAOException ex) {
+            System.out.println("Error! BetManager deleteBet not working!");
         }
     }
 }

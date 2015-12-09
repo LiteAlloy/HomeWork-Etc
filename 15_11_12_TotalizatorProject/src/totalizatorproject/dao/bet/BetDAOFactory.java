@@ -1,7 +1,7 @@
-package totalizatorproject.dao;
+package totalizatorproject.dao.bet;
 
 import totalizator.configurations.TotalizatorSettings;
-import totalizatorproject.dao.fotest.BetDAOTest;
+import totalizatorproject.dao.a_test.BetDAOTest;
 import totalizatorproject.logic.DAOAnnotation;
 
 @DAOAnnotation(daoName = "totalizatorproject.dao.fotest.BetDAOTest")

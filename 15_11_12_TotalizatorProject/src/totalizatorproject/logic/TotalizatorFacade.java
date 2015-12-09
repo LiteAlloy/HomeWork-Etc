@@ -19,16 +19,18 @@ public class TotalizatorFacade {
     
     public String addUser(User user){
         try {
-            return userManager.addUser(user);
+            userManager.addUser(user);
         } catch (TotalizatorBusinessException ex) {
+            System.out.println("Facade User Error!");
+            ex.printStackTrace(System.out);
         }
-        return "mail";
+        return user.getMail();
     }
     public User getUser(String mail){
         return userManager.getUser(mail);
     }
-    public void uppdateUser(User user){
-        userManager.uppdateUser(user);
+    public void uppdateUser(String mail){
+        userManager.uppdateUser(mail);
     }
     public void deleteUser(String mail){
         userManager.deleteUser(mail);
@@ -41,6 +43,8 @@ public class TotalizatorFacade {
         try {
             horseraceManager.addHorserace(race);
         } catch (TotalizatorBusinessException ex) {
+            System.out.println("Facade Horserace Error!");
+            ex.printStackTrace(System.out);
         }
     }
     public void uppdateHorserace(Horserace race){
@@ -54,15 +58,17 @@ public class TotalizatorFacade {
         try {
             betManager.addBet(bet);
         } catch (TotalizatorBusinessException ex) {
+            System.out.println("Facade Bet Error!");
+            ex.printStackTrace(System.out);
         }
     }
     public void checkBet(Bet bet){
         betManager.checkBet(bet);
     }
-    public void sendBetResult(Bet bet){
-        betManager.sendBetResult(bet);
+    public void sendBetResult(long betId){
+        betManager.sendBetResult(betId);
     }
-    public void deleteBet(Bet bet){
-        betManager.deleteBet(bet);
+    public void deleteBet(long betId){
+        betManager.deleteBet(betId);
     }
 }

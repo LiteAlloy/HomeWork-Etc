@@ -1,10 +1,10 @@
-package totalizatorproject.dao;
+package totalizatorproject.dao.user;
 
 import totalizator.configurations.TotalizatorSettings;
-import totalizatorproject.dao.fotest.UserDAOTest;
+import totalizatorproject.dao.a_test.UserDAOTest;
 import totalizatorproject.logic.DAOAnnotation;
 
-@DAOAnnotation(daoName = "totalizatorproject.dao.fotest.UserFileSerialDAO")
+@DAOAnnotation(daoName = "totalizatorproject.dao.a_test.UserFileSerialDAO")
 public class UserDAOFactory {
 
     public static UserDAO GetUserDAO() {

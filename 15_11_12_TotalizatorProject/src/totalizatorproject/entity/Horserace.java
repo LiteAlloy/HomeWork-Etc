@@ -1,12 +1,18 @@
 package totalizatorproject.entity;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class Horserace implements Serializable{
     
     private long raceId;
-    private String [] horses = {"1", "2", "3", "4", "5"};
-    private boolean date;
+    private ArrayList<String> horses;
+    private Date date;
     private String winner;
 
     public long getRaceId() {
@@ -16,18 +22,30 @@ public class Horserace implements Serializable{
         this.raceId = raceId;
     }
 
-    public String[] getHorses() {
+    public ArrayList<String> getHorses() {
         return horses;
     }
-    public void setHorses(String[] horses) {
+
+    public void setHorses(ArrayList<String> horses) {
         this.horses = horses;
     }
 
-    public boolean getDate() {
+    public Date getDate() {
         return date;
     }
-    public void setDate(boolean date) {
+
+    public void setDate(Date date) {
         this.date = date;
+    }
+    
+    //второй сеттер даты принимает в аргумент СТРОКУ
+    public void setDate(String date) { 
+        DateFormat format2 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+        try {
+            this.date = format2.parse(date);
+        } catch (ParseException ex) {
+            System.out.println("setDate со стороковым аргументом не работает!");
+        }
     }
 
     public String getWinner() {

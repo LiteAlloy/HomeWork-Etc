@@ -1,19 +1,15 @@
 package movingframe;
 
-import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import static java.util.concurrent.Executors.newSingleThreadExecutor;
 
 public class Starter {
-    
-    public static void main(String[] args) {
-        FrameForMovement ffm = new FrameForMovement();
-    try{
-        MovingFrame mf = new MovingFrame(ffm);
-        MovingThread mt = new MovingThread(mf);
-        mt.start();
-    } catch (IOException ex) {
+
+    public static void main(String[] args) throws Exception {
         
-    }
+        ExecutorService es = newSingleThreadExecutor();
+        es.execute(new MovingFrame());
+        es.shutdown();
         
-    
     }
 }

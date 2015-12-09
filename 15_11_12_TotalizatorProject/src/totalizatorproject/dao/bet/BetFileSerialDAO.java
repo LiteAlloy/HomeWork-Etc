@@ -1,4 +1,4 @@
-package totalizatorproject.dao;
+package totalizatorproject.dao.bet;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -7,20 +7,20 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import totalizatorproject.entity.User;
+import totalizatorproject.entity.Bet;
 import totalizatorproject.exceptions.TotalizatorDAOException;
 
-public class UserFileSerialDAO extends UserFileDAO {
+public class BetFileSerialDAO extends BetFileDAO{
 
-    private static final String FILE_NAME = "users.bin";
-
+    private static final String FILE_NAME = "bets.bin";
+    
     @Override
-    protected void saveCollection() throws TotalizatorDAOException {
+    protected void saveCollection() throws TotalizatorDAOException{
         try {
             FileOutputStream fos = new FileOutputStream(FILE_NAME);
             try {
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
-                oos.writeObject(users);
+                oos.writeObject(bets);
             } finally {
                 fos.close();
             }
@@ -30,13 +30,13 @@ public class UserFileSerialDAO extends UserFileDAO {
     }
 
     @Override
-    protected void loadCollection() throws TotalizatorDAOException {
-        users = new ArrayList<User>();
+    protected void loadCollection() throws TotalizatorDAOException{
+         bets = new ArrayList<Bet>();
         try {
             FileInputStream fis = new FileInputStream(FILE_NAME);
             try {
                 ObjectInputStream ois = new ObjectInputStream(fis);
-                users = (List<User>)ois.readObject();
+                bets = (List<Bet>)ois.readObject();
             } catch (ClassNotFoundException ex) {
                 throw new TotalizatorDAOException(ex);
             } finally {
@@ -46,5 +46,5 @@ public class UserFileSerialDAO extends UserFileDAO {
             throw new TotalizatorDAOException(ex);
         }
     }
-
+    
 }

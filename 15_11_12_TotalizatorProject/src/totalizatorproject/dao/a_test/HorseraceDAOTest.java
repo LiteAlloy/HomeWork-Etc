@@ -1,9 +1,9 @@
-package totalizatorproject.dao.fotest;
+package totalizatorproject.dao.a_test;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import totalizatorproject.dao.HorseraceDAO;
+import totalizatorproject.dao.horserace.HorseraceDAO;
 import totalizatorproject.entity.Horserace;
 import totalizatorproject.exceptions.TotalizatorDAOException;
 
@@ -16,7 +16,7 @@ public class HorseraceDAOTest implements HorseraceDAO{
         try{
             race.setRaceId(raceId);
             Horserace hr = (Horserace)race.clone();
-            races.add(race);
+            races.add(hr);
         } catch (Exception ex) {
             throw new TotalizatorDAOException(ex);
         }

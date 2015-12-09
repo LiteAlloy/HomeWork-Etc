@@ -1,4 +1,4 @@
-package totalizatorproject.dao;
+package totalizatorproject.dao.horserace;
 
 import java.util.List;
 import totalizatorproject.entity.Horserace;
