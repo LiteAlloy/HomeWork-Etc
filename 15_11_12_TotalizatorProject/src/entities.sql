@@ -23,13 +23,6 @@ create table totalizator_bet                    -- ставка
     primary key(bet_id)
 );
 
-create table user_bets                          -- таблица для хранения ставок пользователей
-(
-    user_mail varchar not null,
-    bet_id integer not null,
-    primary key(user_mail)
-);
-
 create table horserace_horses                   -- таблица-список лошадей-участников забегов
 (
     horserace_id integer not null, 
