@@ -38,7 +38,7 @@ public class Horserace implements Serializable{
         this.date = date;
     }
     
-    //второй сеттер даты принимает в аргумент СТРОКУ
+    //второй сеттер даты принимает в аргумент СТРОКУ (безобразие, но опыта работы с датами пока мало)
     public void setDate(String date) { 
         DateFormat format2 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
         try {

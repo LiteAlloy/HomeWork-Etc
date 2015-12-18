@@ -27,14 +27,14 @@ public class Totalizator {
         Horserace race = new Horserace();
         race.setDate(new Date());
         ArrayList<String> horses = new ArrayList<>();
+        horses.add("1");
+        horses.add("2");
         race.setHorses(horses);
-        race.getHorses().add("1");
-        race.getHorses().add("2");
-        race.getHorses().add("3");
+        race.setWinner("Winner1");
         
-        facade.addHorserace(race);
+        race.setRaceId(facade.addHorserace(race));
         facade.uppdateHorserace(race);
-        //facade.deleteHorserace(race.getRaceId());
+        facade.deleteHorserace(race.getRaceId());
         
         System.out.println("---");
         Bet bet = new Bet();
@@ -43,9 +43,9 @@ public class Totalizator {
         bet.setHorse("1");
         bet.setSumm(50);
         
-        facade.addBet(bet);
-        facade.checkBet(bet);
-        //facade.sendBetResult(bet.getBetId());
-        //facade.deleteBet(bet);
+        bet.setBetId(facade.addBet(bet));
+        facade.uppdateBet(bet);
+        facade.sendBetResult(bet.getBetId());
+        facade.deleteBet(bet.getBetId());
     }
 }

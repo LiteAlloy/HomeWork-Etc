@@ -10,19 +10,20 @@ public class BetManager {
 
     BetDAO dao = BetDAOFactory.getBetDAO();
     
-    public void addBet(Bet bet) throws TotalizatorBusinessException{
+    public long addBet(Bet bet) throws TotalizatorBusinessException{
         try {
-            dao.addBet(bet);
+            return dao.addBet(bet);
         } catch (TotalizatorDAOException ex) {
             System.out.println("Error! BetManager addBet not working!");
            throw new TotalizatorBusinessException (ex); 
         }
     }
     
-    public void checkBet(Bet bet){
+    public void uppdateBet(Bet bet){
         try {
             dao.uppdateBet(bet);
         } catch (TotalizatorDAOException ex) {
+            ex.printStackTrace(System.out);
             System.out.println("Error! BetManager checkBet not working!");
         }
     }
@@ -31,6 +32,7 @@ public class BetManager {
         try {
             dao.sendBetResult(betId);
         } catch (TotalizatorDAOException ex) {
+            ex.printStackTrace(System.out);
             System.out.println("Error! BetManager sendBetResult not working!");
         }
     }
@@ -39,7 +41,9 @@ public class BetManager {
         try {
             dao.deleteBet(betId);
         } catch (TotalizatorDAOException ex) {
+            ex.printStackTrace(System.out);
             System.out.println("Error! BetManager deleteBet not working!");
         }
     }
+    
 }

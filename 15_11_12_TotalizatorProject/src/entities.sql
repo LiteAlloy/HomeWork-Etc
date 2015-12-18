@@ -26,6 +26,5 @@ create table totalizator_bet                    -- ставка
 create table horserace_horses                   -- таблица-список лошадей-участников забегов
 (
     horserace_id integer not null, 
-    horse varchar(30) not null,
-    primary key(horserace_id)
+    horse varchar(30) not null
 )

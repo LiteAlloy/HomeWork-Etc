@@ -36,6 +36,8 @@ public class UserManager {
             dao.uppdateUser(mail);
         } catch (TotalizatorDAOException ex) {
             System.out.println("Error! UserManager uppdateUser not working!");
+            
+            ex.printStackTrace(System.out);
         }
     }
 

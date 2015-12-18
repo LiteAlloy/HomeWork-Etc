@@ -9,9 +9,9 @@ import totalizatorproject.exceptions.TotalizatorDAOException;
 public class HorseraceManager {
     HorseraceDAO dao = HorseraceDAOFactory.getHorseraceDAO();
     
-    public void addHorserace(Horserace race) throws TotalizatorBusinessException{
+    public long addHorserace(Horserace race) throws TotalizatorBusinessException{
         try {
-            dao.addHorserace(race);
+            return dao.addHorserace(race);
         } catch (TotalizatorDAOException ex) {
             System.out.println("Error! HorseraceManager addHorserace not working!");
             throw new TotalizatorBusinessException(ex);
@@ -22,6 +22,7 @@ public class HorseraceManager {
             dao.uppdateHorserace(race);
         } catch (TotalizatorDAOException ex) {
             System.out.println("Error! HorseraceManager uppdateHorserace not working!");
+            ex.printStackTrace(System.out);
         }
     }
     public void deleteHorserace(long raceId){
@@ -29,6 +30,7 @@ public class HorseraceManager {
             dao.deleteHorserace(raceId);
         } catch (TotalizatorDAOException ex) {
             System.out.println("Error! HorseraceManager deleteHorserace not working!");
+            ex.printStackTrace(System.out);
         }
     }
 }

@@ -7,9 +7,9 @@ import totalizatorproject.entity.User;
 import totalizatorproject.exceptions.TotalizatorBusinessException;
 
 public class TotalizatorFacade {
-    private UserManager userManager;
-    private HorseraceManager horseraceManager;
-    private BetManager betManager;
+    private final UserManager userManager;
+    private final HorseraceManager horseraceManager;
+    private final BetManager betManager;
     
     public TotalizatorFacade(){
         userManager = new UserManager();
@@ -39,13 +39,14 @@ public class TotalizatorFacade {
         return userManager.getUsersList();
     }
     
-    public void addHorserace(Horserace race){
+    public long addHorserace(Horserace race){
         try {
-            horseraceManager.addHorserace(race);
+            return horseraceManager.addHorserace(race);
         } catch (TotalizatorBusinessException ex) {
             System.out.println("Facade Horserace Error!");
             ex.printStackTrace(System.out);
         }
+        return 0;
     }
     public void uppdateHorserace(Horserace race){
         horseraceManager.uppdateHorserace(race);
@@ -54,16 +55,17 @@ public class TotalizatorFacade {
         horseraceManager.deleteHorserace(raceId);
     }
     
-    public void addBet(Bet bet){
+    public long addBet(Bet bet){
         try {
-            betManager.addBet(bet);
+            return betManager.addBet(bet);
         } catch (TotalizatorBusinessException ex) {
             System.out.println("Facade Bet Error!");
             ex.printStackTrace(System.out);
         }
+        return 0;
     }
-    public void checkBet(Bet bet){
-        betManager.checkBet(bet);
+    public void uppdateBet(Bet bet){
+        betManager.uppdateBet(bet);
     }
     public void sendBetResult(long betId){
         betManager.sendBetResult(betId);

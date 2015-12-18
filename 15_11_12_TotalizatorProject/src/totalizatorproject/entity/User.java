@@ -1,12 +1,12 @@
 package totalizatorproject.entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 
 public class User implements Serializable{
     private String mail;
     private int balance;
-    private List<Bet> bets;
+    private ArrayList<Bet> bets;
 
     public String getMail() {
         return mail;
@@ -24,11 +24,11 @@ public class User implements Serializable{
         this.balance = balance;
     }
 
-    public List<Bet> getBets() {
+    public ArrayList<Bet> getBets() {
         return bets;
     }
 
-    public void setBets(List<Bet> bets) {
+    public void setBets(ArrayList<Bet> bets) {
         this.bets = bets;
     }
 
